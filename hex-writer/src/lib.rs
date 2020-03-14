@@ -1,3 +1,20 @@
+//! HexWriter Write Adaptor
+//!
+//! This struct takes a std::io::Write instance and forwards
+//! any writes performed to the underlaying Write trait object.
+//! However, the data is first formatted into a user-readable
+//! Hex Dump format. This format is similar to the output of
+//! tools like `xxd`, and `hexdump`, printing out row headers
+//! that contain byte offsets and a trailling column that
+//! displayes the ASCII representation of the byte at each
+//! position (or a `.` if it's non-printable).
+//!
+//! Example output:
+//! ```
+//! 0x00000000: 48 65 6C 6C 6F 2C 20 57  6F 72 6C 64 21 0A 0A 4D | Hello, World!..M |
+//! 0x00000010: 6F 72 65 20 74 65 78 74                          | ore text........ |
+//! ```
+
 
 pub struct HexWriter<'a> {
     writer: &'a mut dyn std::io::Write,

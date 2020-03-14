@@ -34,7 +34,7 @@ impl<'a> HexWriter<'a> {
     fn write_(&mut self, buf: &[u8], print: bool) -> std::io::Result<usize> {
         for byte in buf {
             if self.count % 16 == 0 {
-                let prefix = format!("0x{:08X}: ", self.count);
+                let prefix = format!("0x{:08X} | ", self.count);
                 self.writer.write(prefix.as_bytes())?;
             }
             if print {
